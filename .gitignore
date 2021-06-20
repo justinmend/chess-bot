@@ -1,0 +1,6 @@
+# python env and tools
+/env
+
+# pycache
+/server/__pycache__
+
