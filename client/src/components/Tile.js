@@ -15,11 +15,12 @@ function get_tile_color(coordinate){
     }
 }
 
+// To-do:
+// Convert Tile component to functional component.
 class Tile extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isSelected: false,
             tileSelectedColor: "",
             tileColor: get_tile_color(this.props.boardcoordinates)
         };
@@ -40,26 +41,25 @@ class Tile extends React.Component {
     // When user clicks on a tile, clear out all the tiles state first then apply
     // selected tile effect?
 
-    selectTile = () =>{
-        console.log("Current selected state: " + this.state.isSelected);
-        this.setState({isSelected: !this.state.isSelected});
-        if (!this.state.isSelected){
-            this.setState({tileSelectedColor: "selected-tile"});
-        } else {
-            this.setState({tileSelectedColor: ""});
-        }
-    };
+    // selectTile = () =>{
+    //     console.log("Current selected state: " + this.props.isSelected);
+    //     this.setState({isSelected: !this.state.isSelected});
+    //     if (!this.state.isSelected){
+    //         this.setState({tileSelectedColor: "selected-tile"});
+    //     } else {
+    //         this.setState({tileSelectedColor: ""});
+    //     }
+    // };
 
-    clearTileState(){
-        console.log("Clearing tile state");
-        this.setState({isSelected: false, tileSelectedColor: ""});
+    selectTile = () =>{
+        // Can you watch/hook props
     }
 
     render() {
         if (this.state.tileColor === "black") {
-            return (<span onClick={this.selectTile} className={`tile black-tile ${this.state.tileSelectedColor}`}><Piece boardcoordinates={this.props.boardcoordinates}/></span>);
+            return (<span className={`tile black-tile ${this.state.tileSelectedColor}`}><Piece boardcoordinates={this.props.boardcoordinates}/></span>);
          } else {
-             return (<span onClick={this.selectTile} className={`tile white-tile ${this.state.tileSelectedColor}`}><Piece boardcoordinates={this.props.boardcoordinates}/></span>);
+             return (<span className={`tile white-tile ${this.state.tileSelectedColor}`}><Piece boardcoordinates={this.props.boardcoordinates}/></span>);
          }
     }
 
