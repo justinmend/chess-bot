@@ -2,5 +2,5 @@
 /env
 
 # pycache
-/server/__pycache__
+/server/src/__pycache__
 
