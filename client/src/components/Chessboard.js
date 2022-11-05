@@ -5,13 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const BOARD_COL_LEN = 8, BOARD_ROW_LEN = 8
 
-//To-do:
-// Need to add a way to clean up other tile instances' selected state when
-// a specific tile is selected.
-// Will race condition be a problem if I clear out all the tile instances' state, then apply the
-// selected state effect to a specific tile? Which one will be executed first?
-// Can you call a parent function from a child component
-
 function createBoardTiles (){
     let boardTiles = []
     for (let rowIdx = BOARD_ROW_LEN-1; rowIdx >= 0; rowIdx--){
@@ -26,6 +19,7 @@ function createBoardTiles (){
     return boardTiles;
 }
 
+// Todo:
 function setTileSelectedState (){
     console.log("Setting tile's selected state");
     // Do I need the tile key inorder to specify which tile to update?
@@ -35,6 +29,7 @@ function setTileSelectedState (){
 function Chessboard(){
     const [boardTilesState, setBoardTilesState] = useState(createBoardTiles());
 
+    // Todo:
     const cleanupTilesState = () => {
         // Object.keys(boardTiles).map(key => {
         //     console.log(boardTiles[key]);
@@ -48,6 +43,7 @@ function Chessboard(){
 
     }
 
+    // Todo:
     const selectTile = () => {
         // Do I need to create a new board again?
         // Clean up other tile states

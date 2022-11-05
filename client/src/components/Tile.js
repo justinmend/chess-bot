@@ -15,8 +15,6 @@ function get_tile_color(coordinate){
     }
 }
 
-// To-do:
-// Convert Tile component to functional component.
 class Tile extends React.Component {
     constructor(props){
         super(props);
@@ -24,23 +22,9 @@ class Tile extends React.Component {
             tileSelectedColor: "",
             tileColor: get_tile_color(this.props.boardcoordinates)
         };
-
-        
     }
 
-    // To-do:
-    // Need to allow user to select piece and move it.
-    // Highlight the piece to notify user selected the piece to move.
-    // Do we want the user to specifically select the tile or the piece in order to
-    // move the piece? Tile?
-    // When selected change the tile color to yellow?
-    
-    // What about when the user selects a different tile? Will need to 
-    // unhighlight the current tile.
-    // How to clear out the selected state for the other tiles?
-    // When user clicks on a tile, clear out all the tiles state first then apply
-    // selected tile effect?
-
+    // Note: Old version - reference only - not working
     // selectTile = () =>{
     //     console.log("Current selected state: " + this.props.isSelected);
     //     this.setState({isSelected: !this.state.isSelected});
@@ -51,8 +35,9 @@ class Tile extends React.Component {
     //     }
     // };
 
+    // Todo
     selectTile = () =>{
-        // Can you watch/hook props
+        // Can you watch/hook props?
     }
 
     render() {
