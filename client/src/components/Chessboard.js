@@ -12,7 +12,7 @@ function createBoardTiles (){
             let boardcoordinates = {x: colIdx, y: rowIdx}
             let tileId = uuidv4();
             boardTiles.push(
-                <Tile key={tileId}  boardcoordinates={boardcoordinates} setTileSelectedState={setTileSelectedState}/>
+                <Tile key={tileId}  boardcoordinates={boardcoordinates}/>
             );
         }
     }
@@ -20,9 +20,9 @@ function createBoardTiles (){
 }
 
 // Todo:
-function setTileSelectedState (){
-    console.log("Setting tile's selected state");
-    // Do I need the tile key inorder to specify which tile to update?
+// Where to handle setting a tile to the "selected" state when tile is clicked/selected?
+// What about toggling? How to also handle clearing the selected state of a specific tile?
+function toggleTileSelectedState (){
     
 }
 
@@ -31,30 +31,15 @@ function Chessboard(){
 
     // Todo:
     const cleanupTilesState = () => {
-        // Object.keys(boardTiles).map(key => {
-        //     console.log(boardTiles[key]);
-        // })
         // boardTilesState.forEach(tile => {
         //     console.log("tile: " + tile.key + " coordinates: " + tile.props.boardcoordinates.x);
         // })
 
-        console.log("cleaning up tiles");
-        // Set isSelected to false for all tiles?
-
-    }
-
-    // Todo:
-    const selectTile = () => {
-        // Do I need to create a new board again?
-        // Clean up other tile states
-        // Update currently selected tiles state of isSelected to true.
-        
-        console.log("Tile Selected");
     }
 
     return (
         <div>
-            <div id="chessboard" onClick={cleanupTilesState}>{boardTilesState}</div>
+            <div id="chessboard">{boardTilesState}</div>
         </div>
         
     );    

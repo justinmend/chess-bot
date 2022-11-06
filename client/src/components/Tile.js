@@ -20,7 +20,8 @@ class Tile extends React.Component {
         super(props);
         this.state = {
             tileSelectedColor: "",
-            tileColor: get_tile_color(this.props.boardcoordinates)
+            tileColor: get_tile_color(this.props.boardcoordinates),
+            isSelected: false
         };
     }
 
