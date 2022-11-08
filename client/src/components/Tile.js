@@ -1,6 +1,5 @@
 import "./Tile.css";
 import React from "react";
-import Piece from "./Piece.js"
 
 const colorEnum = {
     WHITE_TILE: "white",
@@ -15,41 +14,30 @@ function get_tile_color(coordinate){
     }
 }
 
+function get_tile_selected_color(isSelected){
+    if (isSelected === true) {
+        return "selected-tile"
+    } else {
+        return ""
+    }
+}
+
 class Tile extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            tileSelectedColor: "",
+            tileSelectedColor: get_tile_selected_color(this.props.isSelected),
             tileColor: get_tile_color(this.props.boardcoordinates),
-            isSelected: false
         };
     }
 
-    // Note: Old version - reference only - not working
-    // selectTile = () =>{
-    //     console.log("Current selected state: " + this.props.isSelected);
-    //     this.setState({isSelected: !this.state.isSelected});
-    //     if (!this.state.isSelected){
-    //         this.setState({tileSelectedColor: "selected-tile"});
-    //     } else {
-    //         this.setState({tileSelectedColor: ""});
-    //     }
-    // };
-
-    // Todo
-    selectTile = () =>{
-        // Can you watch/hook props?
-    }
-
     render() {
-        if (this.state.tileColor === "black") {
-            return (<span className={`tile black-tile ${this.state.tileSelectedColor}`}><Piece boardcoordinates={this.props.boardcoordinates}/></span>);
-         } else {
-             return (<span className={`tile white-tile ${this.state.tileSelectedColor}`}><Piece boardcoordinates={this.props.boardcoordinates}/></span>);
-         }
+        return (
+            <span className={`tile ${this.state.tileColor}-tile ${this.state.tileSelectedColor}`}>
+                {this.props.children}
+            </span>
+            );
     }
-
-    
 }
 
 export default Tile;
