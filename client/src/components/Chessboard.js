@@ -1,7 +1,6 @@
 import "./Chessboard.css";
 import React, { useEffect, useState } from "react";
 import Tile from "./Tile.js";
-import Piece from "./Piece.js";
 import { v4 as uuidv4 } from "uuid";
 
 const BOARD_COL_LEN = 8, BOARD_ROW_LEN = 8
@@ -74,17 +73,8 @@ function add_pieces() {
         for (let colIdx = 0; colIdx < BOARD_COL_LEN; colIdx++){
             let boardcoordinates = {x: colIdx, y: rowIdx}
             let tileId = uuidv4();
-            
-            pieces_data.forEach(piece => {
-                let pieceId = uuidv4()
-                if (piece.x === boardcoordinates.x && piece.y === boardcoordinates.y) {
-                    boardTiles.push(
-                        <Tile key={tileId}  boardcoordinates={boardcoordinates} isSelected={false}>
-                            <Piece key={pieceId} pieceimage={piece.image} piececoordinates={{x: piece.x, y: piece.y}} />
-                        </Tile>
-                    );
-                }
-            });
+
+            boardTiles.push(<Tile key={tileId}  pieces_data={pieces_data} boardcoordinates={boardcoordinates} isSelected={false}/>)
 
         }
     }
