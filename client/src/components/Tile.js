@@ -1,18 +1,14 @@
 import "./Tile.css";
-import React from "react";
+import React, { useState } from "react";
 import Piece from "./Piece.js";
 import { v4 as uuidv4 } from "uuid";
-
-const colorEnum = {
-    WHITE_TILE: "white",
-    BLACK_TILE: "black"
-}
+import * as TILE from '../constants/tile';
 
 function get_tile_color(coordinate){
     if ((coordinate.x % 2 === 0 && coordinate.y % 2 === 0) || (coordinate.x % 2 !== 0 && coordinate.y % 2 !== 0)){
-        return colorEnum.BLACK_TILE
+        return TILE.COLOR.BLACK
     } else {
-        return colorEnum.WHITE_TILE
+        return TILE.COLOR.WHITE
     }
 }
 
@@ -35,21 +31,14 @@ function get_piece(pieces_data, boardcoordinates){
     };    
 }
 
-class Tile extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            tileSelectedColor: get_tile_selected_color(this.props.isSelected),
-            tileColor: get_tile_color(this.props.boardcoordinates),
-            piece: get_piece(this.props.pieces_data, this.props.boardcoordinates)
-        };
-    }
+function Tile (props) {
+    const [tileSelectedColor, setTileSelectedColor] = useState(get_tile_selected_color(props.isSelected))
+    const [tileColor, setTileColor] = useState(get_tile_color(props.boardcoordinates))
+    const [piece, setPiece] = useState(get_piece(props.pieces_data, props.boardcoordinates))
 
-    render() {
-        return (
-            <span className={`tile ${this.state.tileColor}-tile ${this.state.tileSelectedColor}`}>{this.state.piece}</span>
-        );
-    }
+    return (
+        <span className={`tile ${tileColor}-tile ${tileSelectedColor}`}>{piece}</span>
+    );
 }
 
 export default Tile;
