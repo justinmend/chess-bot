@@ -1,5 +1,5 @@
 import "./Tile.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Piece from "./Piece.js";
 import { v4 as uuidv4 } from "uuid";
 import * as TILE from '../constants/tile';
@@ -32,12 +32,17 @@ function get_piece(pieces_data, boardcoordinates){
 }
 
 function Tile (props) {
-    const [tileSelectedColor, setTileSelectedColor] = useState(get_tile_selected_color(props.isSelected))
+    const [isSelected, toggleSelection] = useState(false)
+    const [tileSelectedColor, setTileSelectedColor] = useState("")
     const [tileColor, setTileColor] = useState(get_tile_color(props.boardcoordinates))
     const [piece, setPiece] = useState(get_piece(props.pieces_data, props.boardcoordinates))
 
+    useEffect(() => {
+        setTileSelectedColor(get_tile_selected_color(isSelected))
+    }, [isSelected])
+
     return (
-        <span className={`tile ${tileColor}-tile ${tileSelectedColor}`}>{piece}</span>
+        <span className={`tile ${tileColor}-tile ${tileSelectedColor}`} onClick={() => toggleSelection(!isSelected)} >{piece}</span>
     );
 }
 

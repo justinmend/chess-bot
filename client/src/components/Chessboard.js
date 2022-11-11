@@ -14,7 +14,7 @@ function add_pieces() {
             let boardcoordinates = {x: colIdx, y: rowIdx}
             let tileId = uuidv4();
 
-            boardTiles.push(<Tile key={tileId}  pieces_data={pieces_data} boardcoordinates={boardcoordinates} isSelected={false}/>)
+            boardTiles.push(<Tile key={tileId}  pieces_data={pieces_data} boardcoordinates={boardcoordinates} />)
 
         }
     }
