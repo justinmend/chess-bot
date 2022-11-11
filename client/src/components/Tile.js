@@ -1,6 +1,6 @@
 import "./Tile.css";
 import React, { useEffect, useState } from "react";
-import Piece from "./Piece.js";
+import Piece from "./Piece.tsx";
 import { v4 as uuidv4 } from "uuid";
 import * as TILE from '../constants/tile';
 
