@@ -2,7 +2,7 @@
 ## Getting Started:
 ###### Terminal Commands:
 * How to start the client side development server?
-    * In the terminal, “cd” into the client directory and run “npm start” to start the server.
+    * In the terminal, “cd” into the client directory and run “yarn start” to start the server. This should start the server at http://localhost:3000/
 * How to start the server side?
     1. Create a python virtual environment to run this project
         * https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/

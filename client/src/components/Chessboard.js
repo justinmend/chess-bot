@@ -1,6 +1,6 @@
 import "./Chessboard.css";
 import React, { useEffect, useState } from "react";
-import Tile from "./Tile.js";
+import Tile from "./Tile.tsx";
 import { v4 as uuidv4 } from "uuid";
 import { get_mock_pieces_data } from "../mock_data/get_mock_pieces_data";
 import * as BOARD from '../constants/board';

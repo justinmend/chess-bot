@@ -1,10 +1,22 @@
 import "./Tile.css";
 import React, { useEffect, useState } from "react";
-import Piece from "./Piece.tsx";
+import Piece from "./Piece";
 import { v4 as uuidv4 } from "uuid";
 import * as TILE from '../constants/tile';
+import { Coordinate } from "./Coordinate";
 
-function get_tile_color(coordinate){
+interface IPiece{
+    x: number;
+    y: number;
+    image: string;
+}
+
+type Props = {
+    boardcoordinates: Coordinate,
+    pieces_data: IPiece[]
+}
+
+function get_tile_color(coordinate: Coordinate){
     if ((coordinate.x % 2 === 0 && coordinate.y % 2 === 0) || (coordinate.x % 2 !== 0 && coordinate.y % 2 !== 0)){
         return TILE.COLOR.BLACK
     } else {
@@ -12,7 +24,7 @@ function get_tile_color(coordinate){
     }
 }
 
-function get_tile_selected_color(isSelected){
+function get_tile_selected_color(isSelected: boolean){
     if (isSelected === true) {
         return "selected-tile"
     } else {
@@ -20,7 +32,7 @@ function get_tile_selected_color(isSelected){
     }
 }
 
-function get_piece(pieces_data, boardcoordinates){
+function get_piece(pieces_data: IPiece[], boardcoordinates: Coordinate){
     let pieceId = uuidv4()
     for (let piece of pieces_data) {
         if (piece.x === boardcoordinates.x && piece.y === boardcoordinates.y) {
@@ -31,11 +43,11 @@ function get_piece(pieces_data, boardcoordinates){
     };    
 }
 
-function Tile (props) {
+const Tile = ({pieces_data, boardcoordinates}: Props) => {
     const [isSelected, toggleSelection] = useState(false)
     const [tileSelectedColor, setTileSelectedColor] = useState("")
-    const [tileColor, setTileColor] = useState(get_tile_color(props.boardcoordinates))
-    const [piece, setPiece] = useState(get_piece(props.pieces_data, props.boardcoordinates))
+    const [tileColor, setTileColor] = useState(get_tile_color(boardcoordinates))
+    const [piece, setPiece] = useState(get_piece(pieces_data, boardcoordinates))
 
     useEffect(() => {
         setTileSelectedColor(get_tile_selected_color(isSelected))
