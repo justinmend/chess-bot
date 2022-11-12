@@ -1,5 +1,5 @@
 import * as BOARD from '../constants/board_enum';
-import * as INIT from '../constants/piece_enum';
+import * as PIECE from '../constants/piece_enum';
 
 const mock_pieces_data = [];
 
@@ -13,8 +13,8 @@ function map_mock_pieces_data() {
 }
 function map_pawn_images() {
     for (let colIdx = 0; colIdx < BOARD.DIMENSIONS.COL_LEN; colIdx++) {
-        mock_pieces_data.push({ image: "./Chess_pdt60.png", x: colIdx, y: INIT.SETUP.BLACK_PWN_ROW_IDX });
-        mock_pieces_data.push({ image: "./Chess_plt60.png", x: colIdx, y: INIT.SETUP.WHITE_PWN_ROW_IDX });
+        mock_pieces_data.push({ image: "./Chess_pdt60.png", x: colIdx, y: PIECE.INIT.BLACK_PWN_ROW_IDX });
+        mock_pieces_data.push({ image: "./Chess_plt60.png", x: colIdx, y: PIECE.INIT.WHITE_PWN_ROW_IDX });
     }
 }
 function map_rook_images() {
