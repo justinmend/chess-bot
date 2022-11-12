@@ -2,8 +2,8 @@ import "./Tile.css";
 import React, { useEffect, useState } from "react";
 import Piece from "./Piece";
 import { v4 as uuidv4 } from "uuid";
-import * as TILE from '../constants/tile';
-import { Coordinate } from "./Coordinate";
+import * as TILE from '../constants/tile_enum';
+import { Coordinate } from "../constants/coordinate_interface";
 
 interface IPiece{
     x: number;

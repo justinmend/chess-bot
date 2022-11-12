@@ -1,5 +1,5 @@
-import * as BOARD from '../constants/board';
-import * as INIT from '../constants/init';
+import * as BOARD from '../constants/board_enum';
+import * as INIT from '../constants/piece_enum';
 
 const mock_pieces_data = [];
 

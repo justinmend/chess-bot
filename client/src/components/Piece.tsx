@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Coordinate } from "./Coordinate";
+import { Coordinate } from "../constants/coordinate_interface";
 import "./Piece.css";
 
 type Props = {
