@@ -1,11 +1,11 @@
-import Chessboard from "./components/Chessboard.js";
+import Chessboard from "./components/Chessboard";
 import './App.css';
 import React, { useEffect, useState } from "react";
 // import io from "socket.io-client";
 // let endPoint = "http://localhost:5000";
 // let socket = io.connect(`${endPoint}`);
 
-export default function App() {
+const App = () => {
   // const [connectionStatus, setConnectionStatus] = useState("")
 
   // useEffect(() => {
@@ -31,3 +31,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;

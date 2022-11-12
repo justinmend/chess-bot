@@ -4,12 +4,7 @@ import Piece from "./Piece";
 import { v4 as uuidv4 } from "uuid";
 import * as TILE from '../constants/tile_enum';
 import { Coordinate } from "../constants/coordinate_interface";
-
-interface IPiece{
-    x: number;
-    y: number;
-    image: string;
-}
+import { IPiece } from "../constants/piece_interface";
 
 type Props = {
     boardcoordinates: Coordinate,

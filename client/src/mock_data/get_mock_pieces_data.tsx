@@ -1,7 +1,8 @@
 import * as BOARD from '../constants/board_enum';
 import * as PIECE from '../constants/piece_enum';
+import { IPiece } from '../constants/piece_interface';
 
-const mock_pieces_data = [];
+const mock_pieces_data: IPiece[] = [];
 
 function map_mock_pieces_data() {
     map_pawn_images();
