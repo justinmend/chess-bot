@@ -35,28 +35,57 @@ function get_piece(pieces_data: IPiece[], boardcoordinates: Coordinate){
                 <Piece key={pieceId} pieceimage={piece.image} piececoordinates={{x: piece.x, y: piece.y}} />
             );
         }
-    };    
+    }; 
+    
+    return (null)
 }
 
 // Todo:
-// Add function to determine if tile is selectable or not.
-// Can only select if tile is occupied with a chess piece
-function is_tile_occupied(){
+function useTileSelectedStatus(){
+    const [isTileSelected, setIsTileSelected] = useState<boolean>(false);
+    
+    // get data from backend
+    // placeholder
+    useEffect(() => {
+        setIsTileSelected(false)
+    }, [isTileSelected])
 
+    return isTileSelected
+}
+
+// Todo:
+function useTileOccupiedStatus(){
+    const [isTileOccuppied, setIsTileOccupied] = useState<boolean>(false)
+
+    // get data from backend
+    // placeholder
+    useEffect(() => {
+        setIsTileOccupied(true)
+    }, [isTileOccuppied])
+
+    return isTileOccuppied
 }
 
 const Tile = ({pieces_data, boardcoordinates}: Props) => {
-    const [tileSelected, toggleSelection] = useState(false)
     const [tileSelectedColor, setTileSelectedColor] = useState("")
     const [tileColor, setTileColor] = useState(get_tile_color(boardcoordinates))
     const [piece, setPiece] = useState(get_piece(pieces_data, boardcoordinates))
+    const isSelected = useTileSelectedStatus()
+    const isOccuppied = useTileOccupiedStatus()
+
+    const select_tile = () => {
+        if (isOccuppied === true) {
+            // update backend
+            // toggle tile's selected state
+        }
+    }
 
     useEffect(() => {
-        setTileSelectedColor(get_tile_selected_color(tileSelected))
-    }, [tileSelected])
+        setTileSelectedColor(get_tile_selected_color(isSelected))
+    }, [isSelected])
 
     return (
-        <span className={`tile ${tileColor}-tile ${tileSelectedColor}`} onClick={() => toggleSelection(!tileSelected)}>{piece}</span>
+        <span className={`tile ${tileColor}-tile ${tileSelectedColor}`} onClick={() => select_tile}>{piece}</span>
     );
 }
 
