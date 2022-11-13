@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { get_mock_pieces_data } from "../mock_data/get_mock_pieces_data";
 import * as BOARD from '../constants/board_enum';
 import { IPiece } from "../constants/piece_interface";
+import { Coordinate } from "../constants/coordinate_interface";
 
 function add_pieces() {
     const pieces_data: IPiece[] = get_mock_pieces_data()
@@ -12,8 +13,8 @@ function add_pieces() {
     
     for (let rowIdx = BOARD.DIMENSIONS.ROW_LEN-1; rowIdx >= 0; rowIdx--){
         for (let colIdx = 0; colIdx < BOARD.DIMENSIONS.COL_LEN; colIdx++){
-            let boardcoordinates = {x: colIdx, y: rowIdx}
-            let tileId = uuidv4();
+            let boardcoordinates: Coordinate = {x: colIdx, y: rowIdx}
+            let tileId: string = uuidv4();
 
             boardTiles.push(<Tile key={tileId}  pieces_data={pieces_data} boardcoordinates={boardcoordinates} />)
 

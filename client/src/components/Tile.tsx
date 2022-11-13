@@ -38,18 +38,25 @@ function get_piece(pieces_data: IPiece[], boardcoordinates: Coordinate){
     };    
 }
 
+// Todo:
+// Add function to determine if tile is selectable or not.
+// Can only select if tile is occupied with a chess piece
+function is_tile_occupied(){
+
+}
+
 const Tile = ({pieces_data, boardcoordinates}: Props) => {
-    const [isSelected, toggleSelection] = useState(false)
+    const [tileSelected, toggleSelection] = useState(false)
     const [tileSelectedColor, setTileSelectedColor] = useState("")
     const [tileColor, setTileColor] = useState(get_tile_color(boardcoordinates))
     const [piece, setPiece] = useState(get_piece(pieces_data, boardcoordinates))
 
     useEffect(() => {
-        setTileSelectedColor(get_tile_selected_color(isSelected))
-    }, [isSelected])
+        setTileSelectedColor(get_tile_selected_color(tileSelected))
+    }, [tileSelected])
 
     return (
-        <span className={`tile ${tileColor}-tile ${tileSelectedColor}`} onClick={() => toggleSelection(!isSelected)} >{piece}</span>
+        <span className={`tile ${tileColor}-tile ${tileSelectedColor}`} onClick={() => toggleSelection(!tileSelected)}>{piece}</span>
     );
 }
 

@@ -4,11 +4,12 @@ import "./Piece.css";
 
 type Props = {
     pieceimage: string,
-    piececoordinates: Coordinate, 
+    piececoordinates: Coordinate
 }
 
-const Piece = ({ pieceimage, piececoordinates }: Props) => {
+const Piece = ({ pieceimage, piececoordinates}: Props) => {
     const [coordinates, setCoordinates] = useState<Coordinate>({x: piececoordinates.x, y: piececoordinates.y})
+    const [isSelected, toggleSelection] = useState<boolean>(false)
 
     if (pieceimage !== null) {
         return (<img className="chess-piece" src={pieceimage} alt=""></img>);
