@@ -5,10 +5,10 @@ import { v4 as uuidv4 } from "uuid";
 import * as TILE from '../constants/tile_enum';
 import { Coordinate } from "../constants/coordinate_interface";
 import { IPiece } from "../constants/piece_interface";
+import { get_mock_pieces_data } from "../mock_data/get_mock_pieces_data";
 
 type Props = {
-    boardcoordinates: Coordinate,
-    pieces_data: IPiece[]
+    boardcoordinates: Coordinate
 }
 
 function get_tile_color(coordinate: Coordinate){
@@ -27,56 +27,52 @@ function get_tile_selected_color(isSelected: boolean){
     }
 }
 
-function get_piece(pieces_data: IPiece[], boardcoordinates: Coordinate){
-    let pieceId = uuidv4()
+function get_piece(boardcoordinates: Coordinate){
+    const pieces_data: IPiece[] = get_mock_pieces_data()
+    //let pieceId = uuidv4()
+    let result_piece = null
+
     for (let piece of pieces_data) {
         if (piece.x === boardcoordinates.x && piece.y === boardcoordinates.y) {
-            return (
-                <Piece key={pieceId} pieceimage={piece.image} piececoordinates={{x: piece.x, y: piece.y}} />
-            );
+           //result_piece = <Piece key={pieceId} pieceimage={piece.image} piececoordinates={{x: piece.x, y: piece.y}} />
+           result_piece = <Piece pieceimage={piece.image} piececoordinates={{x: piece.x, y: piece.y}} />
+           break;
         }
     }; 
     
-    return (null)
+    return (result_piece)
 }
 
-// Todo:
-function useTileSelectedStatus(){
-    const [isTileSelected, setIsTileSelected] = useState<boolean>(false);
-    
-    // get data from backend
-    // placeholder
-    useEffect(() => {
-        setIsTileSelected(false)
-    }, [isTileSelected])
-
-    return isTileSelected
-}
-
-// Todo:
-function useTileOccupiedStatus(){
+//Todo:
+// How to notify and update selected state of other tiles and clear them out
+// whenever we select a tile?
+function useTileOccupiedStatus(tileCoordinate: Coordinate){
     const [isTileOccuppied, setIsTileOccupied] = useState<boolean>(false)
 
-    // get data from backend
-    // placeholder
     useEffect(() => {
-        setIsTileOccupied(true)
+        const piece = get_piece(tileCoordinate)
+        if (piece !== null) {
+            setIsTileOccupied(true)
+        } else {
+            setIsTileOccupied(false)
+        }
+        
     }, [isTileOccuppied])
 
     return isTileOccuppied
 }
 
-const Tile = ({pieces_data, boardcoordinates}: Props) => {
+const Tile = ({boardcoordinates}: Props) => {
     const [tileSelectedColor, setTileSelectedColor] = useState("")
     const [tileColor, setTileColor] = useState(get_tile_color(boardcoordinates))
-    const [piece, setPiece] = useState(get_piece(pieces_data, boardcoordinates))
-    const isSelected = useTileSelectedStatus()
-    const isOccuppied = useTileOccupiedStatus()
+    const [piece, setPiece] = useState(get_piece(boardcoordinates))
+    const isOccuppied = useTileOccupiedStatus(boardcoordinates)
+    const [isSelected, setIsTileSelected] = useState(false)
+    
 
     const select_tile = () => {
         if (isOccuppied === true) {
-            // update backend
-            // toggle tile's selected state
+            setIsTileSelected(!isSelected)
         }
     }
 
@@ -85,7 +81,7 @@ const Tile = ({pieces_data, boardcoordinates}: Props) => {
     }, [isSelected])
 
     return (
-        <span className={`tile ${tileColor}-tile ${tileSelectedColor}`} onClick={() => select_tile}>{piece}</span>
+        <span className={`tile ${tileColor}-tile ${tileSelectedColor}`} onClick={select_tile}>{piece}</span>
     );
 }
 

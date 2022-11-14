@@ -2,13 +2,10 @@ import "./Chessboard.css";
 import React, { useEffect, useState } from "react";
 import Tile from "./Tile";
 import { v4 as uuidv4 } from "uuid";
-import { get_mock_pieces_data } from "../mock_data/get_mock_pieces_data";
 import * as BOARD from '../constants/board_enum';
-import { IPiece } from "../constants/piece_interface";
 import { Coordinate } from "../constants/coordinate_interface";
 
 function add_pieces() {
-    const pieces_data: IPiece[] = get_mock_pieces_data()
     let boardTiles = []
     
     for (let rowIdx = BOARD.DIMENSIONS.ROW_LEN-1; rowIdx >= 0; rowIdx--){
@@ -16,8 +13,7 @@ function add_pieces() {
             let boardcoordinates: Coordinate = {x: colIdx, y: rowIdx}
             let tileId: string = uuidv4();
 
-            boardTiles.push(<Tile key={tileId}  pieces_data={pieces_data} boardcoordinates={boardcoordinates} />)
-
+            boardTiles.push(<Tile key={tileId} boardcoordinates={boardcoordinates} />)
         }
     }
 
@@ -27,6 +23,16 @@ function add_pieces() {
 
 const Chessboard = () => {
     const [boardTilesState, setBoardTilesState] = useState(add_pieces());
+
+    // Todo:
+    // How to reset other tile's state if any tile's state changes?
+    // useEffect(() => {
+    //     const new_pieces = add_pieces()
+    //     if (boardTilesState !== new_pieces){
+    //         setBoardTilesState(new_pieces)
+    //     }
+        
+    // }, [boardTilesState])
 
     return (
         <div>
