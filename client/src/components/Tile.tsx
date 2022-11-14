@@ -29,12 +29,10 @@ function get_tile_selected_color(isSelected: boolean){
 
 function get_piece(boardcoordinates: Coordinate){
     const pieces_data: IPiece[] = get_mock_pieces_data()
-    //let pieceId = uuidv4()
     let result_piece = null
 
     for (let piece of pieces_data) {
         if (piece.x === boardcoordinates.x && piece.y === boardcoordinates.y) {
-           //result_piece = <Piece key={pieceId} pieceimage={piece.image} piececoordinates={{x: piece.x, y: piece.y}} />
            result_piece = <Piece pieceimage={piece.image} piececoordinates={{x: piece.x, y: piece.y}} />
            break;
         }
