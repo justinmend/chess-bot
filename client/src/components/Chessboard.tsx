@@ -5,34 +5,43 @@ import { v4 as uuidv4 } from "uuid";
 import * as BOARD from '../constants/board_enum';
 import { Coordinate } from "../constants/coordinate_interface";
 
-function add_pieces() {
-    let boardTiles = []
+// function add_pieces() {
+//     let boardTiles = []
     
-    for (let rowIdx = BOARD.DIMENSIONS.ROW_LEN-1; rowIdx >= 0; rowIdx--){
-        for (let colIdx = 0; colIdx < BOARD.DIMENSIONS.COL_LEN; colIdx++){
-            let boardcoordinates: Coordinate = {x: colIdx, y: rowIdx}
-            let tileId: string = uuidv4();
+//     for (let rowIdx = BOARD.DIMENSIONS.ROW_LEN-1; rowIdx >= 0; rowIdx--){
+//         for (let colIdx = 0; colIdx < BOARD.DIMENSIONS.COL_LEN; colIdx++){
+//             let boardcoordinates: Coordinate = {x: colIdx, y: rowIdx}
+//             let tileId: string = uuidv4();
 
-            boardTiles.push(<Tile key={tileId} boardcoordinates={boardcoordinates} />)
-        }
-    }
+//             boardTiles.push(<Tile key={tileId} boardcoordinates={boardcoordinates} />)
+//         }
+//     }
 
-    return boardTiles;
+//     return boardTiles;
 
-}
+// }
 
 const Chessboard = () => {
-    const [boardTilesState, setBoardTilesState] = useState(add_pieces());
+    const [boardTilesState, setBoardTilesState] = useState<any>(null);
+    const [activeTileKey, setActiveTileKey] = useState<string>("")
 
     // Todo:
-    // How to reset other tile's state if any tile's state changes?
-    // useEffect(() => {
-    //     const new_pieces = add_pieces()
-    //     if (boardTilesState !== new_pieces){
-    //         setBoardTilesState(new_pieces)
-    //     }
+    // Only want to allow a single tile to be highlighted/selected.
+    // tile activate state currently not working properly.
+    // activeTileKey state not getting set to the selected tile's tileKey?
+    useEffect(() => {
+        let boardTiles = []
         
-    // }, [boardTilesState])
+        for (let rowIdx = BOARD.DIMENSIONS.ROW_LEN-1; rowIdx >= 0; rowIdx--){
+            for (let colIdx = 0; colIdx < BOARD.DIMENSIONS.COL_LEN; colIdx++){
+                let boardcoordinates: Coordinate = {x: colIdx, y: rowIdx}
+                let tileId: string = uuidv4();
+    
+                boardTiles.push(<Tile key={tileId} tileKey={tileId} isActive={activeTileKey === tileId} onShow={(tileKey: string) => setActiveTileKey(tileKey)} boardcoordinates={boardcoordinates} />)
+            }
+        }
+        setBoardTilesState(boardTiles);
+    }, [])
 
     return (
         <div>

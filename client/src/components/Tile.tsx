@@ -8,7 +8,10 @@ import { IPiece } from "../constants/piece_interface";
 import { get_mock_pieces_data } from "../mock_data/get_mock_pieces_data";
 
 type Props = {
-    boardcoordinates: Coordinate
+    boardcoordinates: Coordinate,
+    isActive: boolean,
+    onShow: (tileKey: string) => void,
+    tileKey: string
 }
 
 function get_tile_color(coordinate: Coordinate){
@@ -41,9 +44,6 @@ function get_piece(boardcoordinates: Coordinate){
     return (result_piece)
 }
 
-//Todo:
-// How to notify and update selected state of other tiles and clear them out
-// whenever we select a tile?
 function useTileOccupiedStatus(tileCoordinate: Coordinate){
     const [isTileOccuppied, setIsTileOccupied] = useState<boolean>(false)
 
@@ -60,23 +60,24 @@ function useTileOccupiedStatus(tileCoordinate: Coordinate){
     return isTileOccuppied
 }
 
-const Tile = ({boardcoordinates}: Props) => {
+const Tile = ({tileKey, boardcoordinates, isActive, onShow}: Props) => {
     const [tileSelectedColor, setTileSelectedColor] = useState("")
     const [tileColor, setTileColor] = useState(get_tile_color(boardcoordinates))
     const [piece, setPiece] = useState(get_piece(boardcoordinates))
     const isOccuppied = useTileOccupiedStatus(boardcoordinates)
-    const [isSelected, setIsTileSelected] = useState(false)
     
-
     const select_tile = () => {
+        console.log("clicked on tile")
         if (isOccuppied === true) {
-            setIsTileSelected(!isSelected)
+            console.log("tile occuppied")      
+            onShow(tileKey);
         }
+        console.log("isActive", isActive)
     }
 
     useEffect(() => {
-        setTileSelectedColor(get_tile_selected_color(isSelected))
-    }, [isSelected])
+        setTileSelectedColor(get_tile_selected_color(isActive))
+    }, [isActive])
 
     return (
         <span className={`tile ${tileColor}-tile ${tileSelectedColor}`} onClick={select_tile}>{piece}</span>
